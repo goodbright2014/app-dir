@@ -2,6 +2,7 @@ import { Carousel } from 'components/carousel';
 import { CtaBanner } from 'components/cta-banner';
 import { ThreeItemGrid } from 'components/grid/three-items';
 import Footer from 'components/layout/footer';
+import { TremorSection } from 'components/tremor-page';
 import { getTranslations } from './translations.server';
 
 export const runtime = 'edge';
@@ -44,7 +45,13 @@ export default async function HomePage() {
         ctaTo="/"
         variant="secondary"
       />
-
+      <TremorSection
+        headline={translations.MockCTAHeadline}
+        description={translations.MockCTADescription}
+        ctaText={translations.MockCTALink}
+        ctaTo="/"
+        variant="secondary"
+      />
       {/* @ts-expect-error Server Component */}
       <Footer />
     </>

@@ -20,6 +20,7 @@
   },
   "dependencies": {
     "@headlessui/react": "^1.7.14",
+    "@tremor/react": "^3.2.3",
     "@vercel/og": "^0.1.0",
     "clsx": "^1.2.1",
     "framer-motion": "^8.4.0",
