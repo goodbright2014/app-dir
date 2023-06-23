@@ -1,3 +1,5 @@
+'use client';
+
 import { getCollectionProducts } from 'lib/shopify';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -10,7 +12,7 @@ export async function Carousel() {
 
   return (
     <div className="relative w-full overflow-hidden bg-black dark:bg-white">
-      <div className="flex animate-carousel">
+      <div className="animate-carousel flex">
         {[...products, ...products].map((product, i) => (
           <Link
             key={`${product.handle}${i}`}

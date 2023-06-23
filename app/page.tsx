@@ -1,6 +1,8 @@
 import { Carousel } from 'components/carousel';
 import { CtaBanner } from 'components/cta-banner';
+import { FerrariInterior } from 'components/ferrari-interior';
 import { ThreeItemGrid } from 'components/grid/three-items';
+import { Intrigue } from 'components/intrigue';
 import Footer from 'components/layout/footer';
 import { TremorSection } from 'components/tremor-page';
 import { getTranslations } from './translations.server';
@@ -45,13 +47,9 @@ export default async function HomePage() {
         ctaTo="/"
         variant="secondary"
       />
-      <TremorSection
-        headline={translations.MockCTAHeadline}
-        description={translations.MockCTADescription}
-        ctaText={translations.MockCTALink}
-        ctaTo="/"
-        variant="secondary"
-      />
+      <FerrariInterior />
+      <Intrigue />
+      <TremorSection />
       {/* @ts-expect-error Server Component */}
       <Footer />
     </>
