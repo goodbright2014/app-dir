@@ -50,7 +50,6 @@ export async function ThreeItemGrid() {
     >
       <ThreeItemGridItem size="full" item={firstProduct!} background="purple" />
       <ThreeItemGridItem size="half" item={secondProduct!} background="black" />
-      <ThreeItemGridItem size="half" item={thirdProduct!} background="pink" />
     </section>
   );
 }

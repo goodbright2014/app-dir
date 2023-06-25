@@ -93,6 +93,43 @@ module.exports = {
         'tremor-default': ['0.875rem', { lineHeight: '1.25rem' }],
         'tremor-title': ['1.125rem', { lineHeight: '1.75rem' }],
         'tremor-metric': ['1.875rem', { lineHeight: '2.25rem' }]
+      },
+      keyframes: {
+        fadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 1.0 }
+        },
+        videoFadeIn: {
+          from: { width: '80%', height: '80%', opacity: 0 },
+          to: { width: '100%', height: '100%', opacity: 1.0 }
+        },
+        stickyFadeIn: {
+          from: { opacity: 0.5 },
+          to: { opacity: 1.0 }
+        },
+        pdfadeIn: {
+          from: { opacity: 0 },
+          to: { opacity: 0.8 }
+        },
+        marquee: {
+          '0%': { transform: 'translateX(0%)' },
+          '100%': { transform: 'translateX(-100%)' }
+        },
+        blink: {
+          '0%': { opacity: 0.2 },
+          '20%': { opacity: 1 },
+          '100% ': { opacity: 0.2 }
+        }
+      },
+      /* @keyframes duration | easing-function | delay |
+          iteration-count | direction | fill-mode | play-state | name */
+      animation: {
+        fadeIn: 'fadeIn 1.2s ease-in-out',
+        pdfadeIn: 'fadeIn .2s ease-in-out',
+        stickyFadeIn: 'stickyFadeIn .01s',
+        videoFadeIn: 'videoFadeIn 4s linear',
+        carousel: 'marquee 10s linear infinite',
+        blink: 'blink 1.4s both infinite'
       }
     }
   },
