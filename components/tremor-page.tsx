@@ -1,8 +1,12 @@
 'use client';
 
 import {
+  AreaChart,
   Card,
+  Color,
+  Flex,
   Grid,
+  Icon,
   Tab,
   TabGroup,
   TabList,
@@ -12,10 +16,13 @@ import {
   Title
 } from '@tremor/react';
 
+import { InformationCircleIcon } from '@heroicons/react/solid';
+
 import type { DeltaType } from '@tremor/react';
 
 import Container from './common/container';
 
+import { useState } from 'react';
 import { KpiCard } from './dashboard/kpi-card';
 
 const kpiData = [
@@ -45,9 +52,46 @@ const kpiData = [
   }
 ];
 
+const Kpis = {
+  Sales: 'Sales',
+  Profit: 'Profit',
+  Customers: 'Customers'
+};
+
+const kpiList = [Kpis.Sales, Kpis.Profit, Kpis.Customers];
+
+const usNumberformatter = (number: number, decimals = 0) =>
+  Intl.NumberFormat('us', {
+    minimumFractionDigits: decimals,
+    maximumFractionDigits: decimals
+  })
+    .format(Number(number))
+    .toString();
+
+const formatters: { [key: string]: any } = {
+  Sales: (number: number) => `$ ${usNumberformatter(number)}`,
+  Profit: (number: number) => `$ ${usNumberformatter(number)}`,
+  Customers: (number: number) => `${usNumberformatter(number)}`,
+  Delta: (number: number) => `${usNumberformatter(number, 2)}%`
+};
+
 export function TremorSection({}: {}) {
+  const [selectedIndex, setSelectedIndex] = useState(0);
+  const selectedKpi = kpiList[selectedIndex]!;
+
+  const areaChartArgs = {
+    className: 'mt-5 h-72',
+    data: performance as unknown as number[],
+    index: 'date',
+    categories: [selectedKpi],
+    colors: ['blue'] as Color[],
+    showLegend: false,
+    valueFormatter: formatters[selectedKpi],
+    yAxisWidth: 56
+  };
+
   return (
-    <Container className="grid  h-screen w-full grid-cols-6 grid-rows-6 gap-10 ">
+    <Container className="grid  h-full w-full grid-cols-6 grid-rows-6 gap-10 ">
       <div className="col-span-2 row-span-6 mx-6 mt-3  max-w-lg  ">
         <h1> Tremor demo</h1>
       </div>
@@ -68,12 +112,41 @@ export function TremorSection({}: {}) {
                   <KpiCard key={item.title} item={item} />
                 ))}
               </Grid>
-              <div className="mt-6">
+              <div className="mt-6 block">
                 <Card>
-                  <div className="h-80" />
+                  <div className="h-80">
+                    <div className="justify-between md:flex">
+                      <div>
+                        <Flex className="space-x-0.5" justifyContent="start" alignItems="center">
+                          <Title> Performance History </Title>
+                          <Icon
+                            icon={InformationCircleIcon}
+                            variant="simple"
+                            tooltip="Shows daily increase or decrease of particular domain"
+                          />
+                        </Flex>
+                        <Text> Daily change per domain </Text>
+                      </div>
+                      <div>
+                        <TabGroup index={selectedIndex} onIndexChange={setSelectedIndex}>
+                          <TabList color="gray" variant="solid">
+                            <Tab>Sales</Tab>
+                            <Tab>Profit</Tab>
+                            <Tab>Customers</Tab>
+                          </TabList>
+                        </TabGroup>
+                      </div>
+                    </div>
+                    {/*  그래프 패널 진행중 */}
+                    <div className="mt-8 hidden sm:block">
+                      <AreaChart {...areaChartArgs} />
+                    </div>
+                    {/*  그래프 패널 마지막 */}
+                  </div>
                 </Card>
               </div>
             </TabPanel>
+
             <TabPanel>
               <div className="mt-6">
                 <Card>

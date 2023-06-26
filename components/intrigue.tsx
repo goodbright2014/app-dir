@@ -4,7 +4,7 @@ export function Intrigue({}: {}) {
   return (
     <div
       id="sectionintregue"
-      className=" sticky top-0 flex h-screen  w-full items-center justify-center "
+      className=" relative top-0 flex h-screen  w-full items-center justify-center "
     >
       <div className="h-screen w-full">
         <>
@@ -16,7 +16,7 @@ export function Intrigue({}: {}) {
               loop={true}
               className="hidden h-screen w-full animate-videoFadeIn sm:block"
             >
-              <source src="LVMH-Hero.mp4" type="video/webm" />
+              <source src="LVMH-Hero-vorbis.webm" type="video/webm" />
             </video>
           </div>
         </>
