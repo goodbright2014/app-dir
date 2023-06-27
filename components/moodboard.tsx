@@ -1,13 +1,36 @@
 'use client';
 import Image from 'next/image';
 
+import { useEffect } from 'react';
+
+import { Gradient } from 'public/MeshGradient.js';
+
 export function LVMHMoodBoard({}: {}) {
+  const backgroundAnimation = () => {
+    const canvas = document.getElementById('gradient-canvas');
+    // @ts-ignore
+    const ctx = canvas!.getContext('2d');
+
+    ctx.fillStyle = 'green';
+    ctx.fillRect(10, 10, 150, 100);
+  };
+
+  useEffect(() => {
+    const gradient = new Gradient();
+    // @ts-ignore
+    gradient.initGradient('#gradient-canvas');
+
+    //backgroundAnimation();
+  }, []);
+
   return (
     <>
       <div
         id="sectionintregue"
-        className=" relative top-0 flex h-screen  w-full items-center justify-center "
+        className=" relative top-0 flex  h-screen  w-full items-center justify-center "
       >
+        <canvas className="gradientStyles" id="gradient-canvas" data-transition-in />
+
         <div className="h-screen w-full">
           <>
             <div id="Hero" className="flex h-screen w-full items-center justify-center">
@@ -16,7 +39,7 @@ export function LVMHMoodBoard({}: {}) {
                 autoPlay={true}
                 muted={true}
                 loop={true}
-                className="hidden h-screen w-full animate-videoFadeIn sm:block"
+                className="hidden h-[33vh] w-[33%] animate-videoFadeIn sm:block"
               >
                 <source src="LVMH-Hero-vorbis.webm" type="video/webm" />
               </video>

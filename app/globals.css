@@ -75,3 +75,16 @@
   -webkit-background-clip: text;
   padding: 0.2rem;
 }
+.gradientStyles {
+  position: absolute;
+  inset: 0px;
+
+  height: 100vh;
+  width: 100%;
+  --gradient-color-1: #c3e4ff;
+  --gradient-color-2: #6ec3f4;
+  --gradient-color-3: #eae2ff;
+  --gradient-color-4: #b9beff;
+  opacity: 0.8;
+  z-index: -1;
+}
