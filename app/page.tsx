@@ -3,6 +3,7 @@ import { FerrariInterior } from 'components/ferrari-interior';
 import { Intrigue } from 'components/intrigue';
 import Footer from 'components/layout/footer';
 import { LVMHMoodBoard } from 'components/moodboard';
+import { SpaceEnergyPattern } from 'components/spaceenergy';
 import { TremorSection } from 'components/tremor-page';
 import { getTranslations } from './translations.server';
 
@@ -41,9 +42,10 @@ export default async function HomePage() {
         variant="secondary"
       />
       <FerrariInterior />
-      <Intrigue />
-      <TremorSection />
       <LVMHMoodBoard />
+      <Intrigue />
+      <SpaceEnergyPattern />
+      <TremorSection />
       {/* @ts-expect-error Server Component */}
       <Footer />
     </>

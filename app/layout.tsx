@@ -32,8 +32,8 @@ const inter = Inter({
 
 export default async function RootLayout({ children }: { children: ReactNode }) {
   return (
-    <html lang="en" className={inter.variable}>
-      <body className="bg-white text-black selection:bg-teal-300 dark:bg-black dark:text-white dark:selection:bg-fuchsia-600 dark:selection:text-white">
+    <html lang="en" className="h-[100%]">
+      <body className="h-[100%] bg-white text-black selection:bg-teal-300 dark:bg-black dark:text-white dark:selection:bg-fuchsia-600 dark:selection:text-white">
         <Suspense fallback={<p>Loading...</p>}>
           {/* @ts-expect-error Server Component */}
           <Navbar />
