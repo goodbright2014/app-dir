@@ -6,49 +6,67 @@ import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
-import { Gradient } from 'public/MeshGradient.js';
-
 export function LVMHMoodBoard({}: {}) {
   gsap.registerPlugin(ScrollTrigger);
 
-  const ref = useRef(null);
+  const ref_moodboard = useRef(null);
 
   useEffect(() => {
-    const gradient = new Gradient();
-    // @ts-ignore
-    gradient.initGradient('#gradient-canvas');
+    const element = ref_moodboard.current;
+    gsap.fromTo(
+      // @ts-ignore
+      element.querySelector('.pDesc'),
+      {
+        opacity: 0,
+        y: 30,
+        duration: 1.6,
+        ease: 'power3'
+      },
+      {
+        opacity: 1,
+        y: 0,
+        ease: 'power3',
+        scrollTrigger: {
+          // @ts-ignore
+          trigger: element.querySelector('.pContainer'),
+          start: 'top 90%',
+          end: 'top 60%',
+          scrub: true
+        }
+      }
+    );
   }, []);
 
-  // useEffect(() => {
-  //   const element = ref.current;
-  //   gsap.fromTo(
-  //     // @ts-ignore
-  //     element.querySelector(".pContent"),
-  //     {
-  //       opacity: 0.25,
-  //       y: 100,
-  //       duration: 1.6,
-  //       ease: 'power1.inOut',
-  //     },
-  //     {
-  //       opacity: 1,
-  //       y: 0,
-  //       ease: "none",
-  //       scrollTrigger: {
-  //         // @ts-ignore
-  //         trigger: element.querySelector(".pSection"),
-  //         start: "top 60%",
-  //         end: "bottom 90%",
-  //         scrub: true
-  //       },
-  //     }
-  //  );
-  // }, []);
+  useEffect(() => {
+    const element = ref_moodboard.current;
+    gsap.fromTo(
+      // @ts-ignore
+      element.querySelector('.pMoodBoardVideo'),
+      {
+        opacity: 0.8,
+        y: -30,
+        duration: 1.6,
+        ease: 'power3'
+      },
+      {
+        opacity: 1,
+        y: 0,
+        ease: 'power3',
+        scrollTrigger: {
+          // @ts-ignore
+          trigger: element.querySelector('.pContainer'),
+          start: 'top 60%',
+          end: 'bottom 90%',
+          scrub: true
+        }
+      }
+    );
+  }, []);
 
   return (
     <>
-      <section className="flex">
-        <div id="media" className="inset-0 w-[56.6vw] ">
+      <section ref={ref_moodboard} className="my-10 flex py-10">
+        <div id="media" className="pContainer inset-0 w-[56.6vw] ">
           <Image
             src="/lvmh-moodboard-left.avif"
             alt="interior-1"
@@ -60,16 +78,16 @@ export function LVMHMoodBoard({}: {}) {
           />
         </div>
 
-        <div id="description" className=" flex w-[40vw] flex-col">
-          <div className="lv-editorial-text-block__description body-l flex  h-[33vh] justify-end  ">
-            <div
-              className=" mr-2 h-[196px] w-[313px] leading-7"
-              style={{
-                transform: 'translateY(30px)',
-                opacity: 0.25
-              }}
-            >
-              <p>
+        <div id="description" className=" flex w-[40vw] flex-col p-0 ">
+          <div className=" relative mb-40  flex  h-[33vh] items-start justify-end">
+            <div className="  mr-2  h-[196px] w-[313px] leading-7">
+              <p
+                className="pDesc"
+                style={{
+                  transform: 'translateY(30px)',
+                  opacity: 0
+                }}
+              >
                 An enduring feminine icon, the Capucines symbolizes the quintessence of Louis
                 Vuitton, crafted with An intuitive blend of elegance, versatility, and savoir-faire.
                 Reimagined in a vibrant spring hue, Zendaya showcases the iconic handbag in Topaz
@@ -77,17 +95,60 @@ export function LVMHMoodBoard({}: {}) {
               </p>
             </div>
           </div>
-          <div className="lv-editorial-text-block__description body-l h-[67vh]">
-            <div id="Hero2" className="mt-12 flex h-full w-full items-center justify-center">
+
+          <div className="relative h-[67vh] pl-7">
+            <div
+              id="Hero2"
+              style={{
+                // We position the video wrapper absolutely
+                // to the top of the parent element
+                // (the div in the `App` component).
+                // This only works because we set a `position` in `App`.
+                // position: 'absolute',
+                // top: 0,
+
+                // To make sure the video is
+                // rendered underneath both banners.
+                zIndex: -1,
+
+                // Flex box with these "center" styles to
+                // always center the video, both horizontally
+                // and vertically.
+                display: 'flex',
+                justifyContent: 'center',
+                alignItems: 'center',
+
+                // 100% width/height for the horizontal/vertical
+                // alignments with flex to work nicely.
+                width: '100%',
+                height: '100%',
+
+                // Hide any overflow, in case the video sticks-out
+                // below the second banner, which can happen if
+                // the screen size gets too wide.
+                overflow: 'hidden'
+              }}
+            >
               <video
                 controls={false}
                 autoPlay={true}
                 muted={true}
                 loop={true}
-                className="hidden h-full w-full animate-videoFadeIn sm:block"
-                style={{ objectFit: 'contain' }}
+                style={{
+                  // The video is allowed to scale it's width
+                  // to the width of the wrapper.
+                  width: '100%',
+                  // But the height should auto adjust
+                  // to keep the aspect-ratio.
+                  // Note, 'auto' is the default value anyway,
+                  // so you could actually leave this `height` out.
+                  height: 'auto',
+                  transform: 'translateY(-30px)',
+                  opacity: 0.8
+                }}
+                className="pMoodBoardVideo"
               >
-                <source src="xzFaPUbqp2_MD.mp4" type="video/webm" />
+                <source src="LVMH-mood-small.webm" type="video/webm" />
               </video>
             </div>
           </div>

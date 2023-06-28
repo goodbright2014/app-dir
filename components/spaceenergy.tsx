@@ -8,7 +8,7 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 
 import { Gradient } from 'public/MeshGradient.js';
 
-export function SpaceEnergyPattern({}: {}) {
+export function SpaceEnergySection({}: {}) {
   gsap.registerPlugin(ScrollTrigger);
 
   const ref = useRef(null);
